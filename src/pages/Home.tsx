@@ -9,8 +9,7 @@ import {
   ArrowTrendingUpIcon,
   CheckCircleIcon,
   PlayIcon,
-  BanknotesIcon,
-  ChatBubbleBottomCenterTextIcon
+  BanknotesIcon
 } from '@heroicons/react/24/outline';
 
 export const Home = () => {

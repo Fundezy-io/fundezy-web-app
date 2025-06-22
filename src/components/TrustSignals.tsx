@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { 
   ShieldCheckIcon, 
-  StarIcon, 
   UserGroupIcon,
   CurrencyDollarIcon,
   ClockIcon
