@@ -358,10 +358,10 @@ export const Dashboard = () => {
             {...mt5Accounts.map((account) => (
               <button
                 key={account.id}
-                onClick={!(account.server === 'MTT' && (tradingAcctStatusMap[account.id] === 'ACTIVE' || tradingAcctStatusMap[account.id] === 'ACTIVE_PARTICIPATING_IN_CHALLENGE')) ? undefined : () => {
+                onClick={(account.server !== 'MTT' || (account.server === 'MTT' && (tradingAcctStatusMap[account.id] === 'ACTIVE' || tradingAcctStatusMap[account.id] === 'ACTIVE_PARTICIPATING_IN_CHALLENGE'))) ?  () => {
                   setSelectedAccount(account);
                   setShowCreateAccount(false);
-                }}
+                }: undefined}
                 className={`p-4 rounded-lg border ${
                   selectedAccount?.id === account.id
                     ? 'border-fundezy-red bg-fundezy-red/10 dark:bg-fundezy-red/20'
@@ -390,7 +390,7 @@ export const Dashboard = () => {
                     )}
                     </div>
                   </div>
-                  {( account.server === 'MTT') && 
+                  {(account.server === 'MTT') && 
                   (<div className={`px-2 py-1 rounded-full text-xs font-medium ${
                     tradingAcctStatusMap[account.id] === 'ACTIVE' || tradingAcctStatusMap[account.id] === 'ACTIVE_PARTICIPATING_IN_CHALLENGE' 
                       ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'

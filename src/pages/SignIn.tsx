@@ -14,6 +14,7 @@ export default function SignIn() {
   const [lastName, setLastName] = useState('');
   const [isSignUp, setIsSignUp] = useState(false);
   const [signUpStage, setSignUpStage] = useState<'name-email' | 'password'>('name-email');
+  const [signInStage, setSignInStage] = useState<'email' | 'password'>('email');
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -47,6 +48,11 @@ export default function SignIn() {
           navigate('/verify-email');
         }
       } else {
+        if (signInStage === 'email') {
+          setSignInStage('password');
+          setIsLoading(false);
+          return;
+        }
         await signInWithEmail(email, password);
         navigate('/dashboard');
       }
@@ -104,9 +110,14 @@ export default function SignIn() {
     setSignUpStage('name-email');
   };
 
+  const handleBackToEmail = () => {
+    setSignInStage('email');
+  };
+
   const handleToggleSignUp = () => {
     setIsSignUp(!isSignUp);
     setSignUpStage('name-email');
+    setSignInStage('email');
   };
 
   if (showUniversityEmailWarning) {
@@ -273,14 +284,14 @@ export default function SignIn() {
                 type="email"
                 autoComplete="email"
                 required
-                className={`appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white ${isSignUp && signUpStage === 'password' ? 'bg-gray-100 dark:bg-gray-800 cursor-not-allowed' : 'bg-white dark:bg-gray-700'} ${!isSignUp || signUpStage === 'name-email' ? 'rounded-t-md' : 'rounded-md'} focus:outline-none focus:ring-fundezy-red focus:border-fundezy-red focus:z-10 sm:text-sm`}
+                className={`appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white ${(signInStage === 'password') ? 'bg-gray-100 dark:bg-gray-800 cursor-not-allowed' : 'bg-white dark:bg-gray-700'} ${(!isSignUp && signInStage === 'email') || (isSignUp && signUpStage === 'name-email') ? 'rounded-t-md' : 'rounded-md'} focus:outline-none focus:ring-fundezy-red focus:border-fundezy-red focus:z-10 sm:text-sm`}
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                readOnly={isSignUp && signUpStage === 'password'}
+                readOnly={(isSignUp && signUpStage === 'password') || (!isSignUp && signInStage === 'password')}
               />
             </div>
-            {(!isSignUp || signUpStage === 'password') && (
+            {(signInStage === 'password') && (
               <div className="relative">
                 <label htmlFor="password" className="sr-only">
                   Password
@@ -316,6 +327,18 @@ export default function SignIn() {
             )}
           </div>
 
+          {(!isSignUp && signInStage === 'password') && (
+            <div className="flex items-center justify-between">
+              <button
+                type="button"
+                onClick={handleBackToEmail}
+                className="text-sm text-fundezy-red hover:text-red-600"
+              >
+                Back
+              </button>
+            </div>
+          )}
+
           {isSignUp && signUpStage === 'password' && (
             <div className="flex items-center justify-between">
               <button
@@ -328,7 +351,7 @@ export default function SignIn() {
             </div>
           )}
 
-          {!isSignUp && (
+          {!isSignUp && signInStage === 'email' && (
             <div className="flex items-center justify-between">
               <button
                 type="button"
