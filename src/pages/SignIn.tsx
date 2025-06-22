@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useAnalytics } from '../hooks/useAnalytics';
 import { isUniversityEmail } from '../utils/emailValidation';
@@ -8,6 +8,7 @@ import { sendEmailVerification } from 'firebase/auth';
 export default function SignIn() {
   const { signInWithGoogle, signInWithEmail, signUpWithEmail, resetPassword } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -23,6 +24,30 @@ export default function SignIn() {
   const [showUniversityEmailWarning, setShowUniversityEmailWarning] = useState(false);
 
   useAnalytics('Sign In');
+
+  // Initialize signup mode from URL parameter
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const mode = searchParams.get('mode');
+    if (mode === 'signup') {
+      setIsSignUp(true);
+    }
+  }, [location.search]);
+
+  // Update URL when signup mode changes
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    if (isSignUp) {
+      searchParams.set('mode', 'signup');
+    } else {
+      searchParams.delete('mode');
+    }
+    const newSearch = searchParams.toString();
+    const newUrl = newSearch ? `${location.pathname}?${newSearch}` : location.pathname;
+    if (newUrl !== location.pathname + location.search) {
+      navigate(newUrl, { replace: true });
+    }
+  }, [isSignUp, location.pathname, location.search, navigate]);
 
   const handleEmailAuth = async (e: React.FormEvent) => {
     e.preventDefault();

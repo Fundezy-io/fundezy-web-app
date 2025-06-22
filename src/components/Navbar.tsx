@@ -4,12 +4,16 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Logo } from './Logo';
 import { ThemeToggle } from './ThemeToggle';
 import { useAuth } from '../contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Check if we're on the signin page with signup mode
+  const isSignUpMode = location.pathname === '/signin' && location.search.includes('mode=signup');
 
   const navigation = [
     { name: 'Home', href: '/' },
@@ -79,10 +83,10 @@ export const Navbar = () => {
             </>
           ) : (
             <a
-              href="/signin"
+              href={isSignUpMode ? "/signin?mode=signup" : "/signin"}
               className="rounded-md bg-fundezy-red px-4 py-2 text-sm font-medium text-white hover:bg-red-600 transition-colors"
             >
-              Sign In
+              {isSignUpMode ? 'Sign Up' : 'Sign In'}
             </a>
           )}
         </div>
@@ -139,11 +143,11 @@ export const Navbar = () => {
                   </>
                 ) : (
                   <a
-                    href="/signin"
+                    href={isSignUpMode ? "/signin?mode=signup" : "/signin"}
                     className="-mx-3 block rounded-lg bg-fundezy-red px-3 py-2.5 text-base font-medium text-white hover:bg-red-600"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    Sign In
+                    {isSignUpMode ? 'Sign Up' : 'Sign In'}
                   </a>
                 )}
               </div>
