@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { getChallenges } from '../services/matchTraderService';
 import { 
-  TrophyIcon,
   ShieldCheckIcon,
   CurrencyDollarIcon,
   ChartBarIcon,

@@ -4,7 +4,7 @@ enum Environment {
   DEV = 'dev',
 }
 
-export const currentEnvironment: Environment = Environment.UAT;
+export const currentEnvironment: Environment = Environment.PROD;
 
 export const API_CONFIG = {
   BASE_URL: 'https://us-central1-fundezy-app.cloudfunctions.net',
