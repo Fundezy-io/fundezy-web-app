@@ -94,7 +94,7 @@ const staggerContainer = {
 
 // Data constants
 const stats = [
-  { number: '$400,000', label: 'Max Funding', icon: BanknotesIcon },
+  { number: '$200,000', label: 'Max Funding', icon: BanknotesIcon },
   { number: 'Up to 80%', label: 'Profit Split', icon: ChartBarIcon },
   { number: '24/7', label: 'Platform Uptime', icon: UserGroupIcon },
   { number: '2024', label: 'Platform Launch', icon: CurrencyDollarIcon },
