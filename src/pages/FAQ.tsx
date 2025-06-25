@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  MagnifyingGlassIcon,
+  QuestionMarkCircleIcon,
+  ChatBubbleLeftRightIcon,
+  DocumentTextIcon,
+  UserGroupIcon,
+  CogIcon
+} from '@heroicons/react/24/outline';
 
 interface FAQItem {
   id: number;
@@ -135,6 +143,16 @@ const faqData: FAQItem[] = [
   }
 ];
 
+const categoryIcons = {
+  'General Questions': QuestionMarkCircleIcon,
+  'Account and Verification': UserGroupIcon,
+  'Challenge Overview': DocumentTextIcon,
+  'Rules and Requirements': CogIcon,
+  'Trading and Profit Details': ChatBubbleLeftRightIcon,
+  'Support and Assistance': ChatBubbleLeftRightIcon,
+  'Other Questions': QuestionMarkCircleIcon,
+};
+
 const highlightText = (text: string, query: string) => {
   if (!query) return text;
   
@@ -144,6 +162,41 @@ const highlightText = (text: string, query: string) => {
       <span key={i} className="bg-yellow-500 text-black">{part}</span> : 
       part
   );
+};
+
+// Animation variants
+const fadeInUp = {
+  initial: { opacity: 0, y: 60 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6 }
+};
+
+const staggerContainer = {
+  animate: {
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const searchContainer = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6 }
+};
+
+const categoryButton = {
+  initial: { opacity: 0, scale: 0.8 },
+  animate: { opacity: 1, scale: 1 },
+  hover: { scale: 1.05, y: -2 },
+  tap: { scale: 0.95 }
+};
+
+const faqItem = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -20 },
+  hover: { y: -2 }
 };
 
 const FAQ: React.FC = () => {
@@ -177,121 +230,214 @@ const FAQ: React.FC = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
       {/* Hero Section */}
-      <section className="bg-gray-50 dark:bg-black text-gray-900 dark:text-white py-16">
-        <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold text-center mb-4">
-            How can we help you?
-          </h1>
-          <p className="text-gray-600 dark:text-gray-300 text-center mb-8">
-            Find answers to frequently asked questions about Fundezy's investment platform.
-          </p>
-          <div className="max-w-2xl mx-auto relative">
-            <input
-              type="text"
-              placeholder="Search for answers..."
-              className="w-full px-12 py-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-fundezy-red border border-gray-200 dark:border-gray-700"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <svg
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+      <section className="relative bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 text-gray-900 dark:text-white py-20">
+        {/* Background decoration */}
+        <div className="absolute inset-0 bg-grid-gray-900/[0.02] bg-[size:60px_60px]"></div>
+        
+        <div className="relative container mx-auto px-4">
+          <motion.div
+            initial="initial"
+            animate="animate"
+            variants={staggerContainer}
+            className="text-center"
+          >
+            
+            <motion.h1 
+              variants={fadeInUp}
+              className="text-4xl md:text-6xl font-bold mb-6"
             >
-              <path
-                d="M9 17C13.4183 17 17 13.4183 17 9C17 4.58172 13.4183 1 9 1C4.58172 1 1 4.58172 1 9C1 13.4183 4.58172 17 9 17Z"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M19 19L14.65 14.65"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
+              How can we help you?
+            </motion.h1>
+
+
+            <div className="w-20 h-1 bg-fundezy-red mx-auto mb-8"></div>
+            
+            <motion.p 
+              variants={fadeInUp}
+              className="text-xl text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto"
+            >
+              Find answers to frequently asked questions about Fundezy's investment platform.
+            </motion.p>
+            
+            <motion.div 
+              variants={searchContainer}
+              className="max-w-2xl mx-auto relative"
+            >
+              <motion.div
+                className="relative"
+                whileFocus={{ scale: 1.02 }}
+                transition={{ duration: 0.2 }}
+              >
+                <input
+                  type="text"
+                  placeholder="Search for answers..."
+                  className="w-full px-12 py-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-fundezy-red border border-gray-200 dark:border-gray-700 shadow-lg"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                <motion.div
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  animate={{ 
+                    scale: searchQuery ? 1.1 : 1,
+                    color: searchQuery ? '#ef4444' : '#9ca3af'
+                  }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <MagnifyingGlassIcon className="w-5 h-5" />
+                </motion.div>
+              </motion.div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
       {/* Category Buttons */}
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex flex-wrap justify-center gap-4">
-          {categories.map((category) => (
-            <button
-              key={category}
-              className={`px-6 py-2 rounded-full transition-colors duration-200 ${
-                activeCategory === category
-                  ? 'bg-fundezy-red text-white'
-                  : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
-              }`}
-              onClick={() => setActiveCategory(category)}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
+      <div className="container mx-auto px-4 py-12">
+        <motion.div 
+          className="flex flex-wrap justify-center gap-4"
+          initial="initial"
+          animate="animate"
+          variants={staggerContainer}
+        >
+          {categories.map((category) => {
+            const IconComponent = category === 'All' ? QuestionMarkCircleIcon : categoryIcons[category as keyof typeof categoryIcons];
+            return (
+              <motion.button
+                key={category}
+                variants={categoryButton}
+                whileHover="hover"
+                whileTap="tap"
+                className={`px-6 py-3 rounded-full transition-all duration-200 flex items-center gap-2 ${
+                  activeCategory === category
+                    ? 'bg-fundezy-red text-white shadow-lg'
+                    : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+                }`}
+                onClick={() => setActiveCategory(category)}
+              >
+                <IconComponent className="w-4 h-4" />
+                {category}
+              </motion.button>
+            );
+          })}
+        </motion.div>
       </div>
 
       {/* FAQ Section */}
-      <section className="container mx-auto px-4 py-8">
+      <section className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto">
-          <AnimatePresence>
-            {filteredFAQs.map((faq) => (
+          <AnimatePresence mode="wait">
+            {filteredFAQs.length > 0 ? (
               <motion.div
-                key={faq.id}
+                key={`${activeCategory}-${searchQuery}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <AnimatePresence>
+                  {filteredFAQs.map((faq, index) => (
+                    <motion.div
+                      key={faq.id}
+                      variants={faqItem}
+                      initial="initial"
+                      animate="animate"
+                      exit="exit"
+                      whileHover="hover"
+                      transition={{ duration: 0.3, delay: index * 0.05 }}
+                      className="mb-4"
+                    >
+                      <motion.div
+                        className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden cursor-pointer border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg transition-shadow duration-300"
+                        onClick={() => toggleFAQ(faq.id)}
+                        whileHover={{ scale: 1.01 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <div className="p-6 flex justify-between items-center">
+                          <h3 className="text-lg font-semibold text-gray-900 dark:text-white pr-4">
+                            {highlightText(faq.question, searchQuery)}
+                          </h3>
+                          <motion.svg
+                            className="w-6 h-6 text-gray-400 flex-shrink-0"
+                            animate={{ 
+                              rotate: expandedItems.includes(faq.id) ? 180 : 0,
+                              color: expandedItems.includes(faq.id) ? '#ef4444' : '#9ca3af'
+                            }}
+                            transition={{ duration: 0.3 }}
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </motion.svg>
+                        </div>
+                        <AnimatePresence>
+                          {expandedItems.includes(faq.id) && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: 'auto', opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.3, ease: "easeInOut" }}
+                              className="overflow-hidden"
+                            >
+                              <div className="px-6 pb-6 text-gray-600 dark:text-gray-300 border-t border-gray-100 dark:border-gray-700">
+                                {renderAnswer(faq.answer)}
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </motion.div>
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+              </motion.div>
+            ) : (
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                className="mb-4"
+                className="text-center py-12"
               >
-                <div
-                  className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden cursor-pointer border border-gray-200 dark:border-gray-700"
-                  onClick={() => toggleFAQ(faq.id)}
-                >
-                  <div className="p-6 flex justify-between items-center">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                      {highlightText(faq.question, searchQuery)}
-                    </h3>
-                    <svg
-                      className={`w-6 h-6 text-gray-400 transform transition-transform duration-200 ${
-                        expandedItems.includes(faq.id) ? 'rotate-180' : ''
-                      }`}
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  </div>
-                  <AnimatePresence>
-                    {expandedItems.includes(faq.id) && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="px-6 pb-6 text-gray-600 dark:text-gray-300"
-                      >
-                        {renderAnswer(faq.answer)}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
+                <QuestionMarkCircleIcon className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                  No results found
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  Try adjusting your search terms or browse all categories.
+                </p>
               </motion.div>
-            ))}
+            )}
           </AnimatePresence>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section className="bg-gray-50 dark:bg-gray-800 py-16">
+        <div className="container mx-auto px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              Still have questions?
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
+              Can't find what you're looking for? Our support team is here to help.
+            </p>
+            <motion.a
+              href="mailto:support@fundezy.io"
+              className="inline-flex items-center px-8 py-4 bg-fundezy-red text-white font-semibold rounded-lg hover:bg-red-600 transition-colors"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Contact Support
+            </motion.a>
+          </motion.div>
         </div>
       </section>
     </div>

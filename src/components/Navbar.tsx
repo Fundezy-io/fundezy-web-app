@@ -33,7 +33,7 @@ export const Navbar = () => {
   };
 
   return (
-    <header className="bg-white border-b border-google-border dark:bg-gray-900 dark:border-gray-700">
+    <header className="sticky top-0 z-50 bg-white border-b border-google-border dark:bg-gray-900 dark:border-gray-700">
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-4" aria-label="Global">
         <div className="flex lg:flex-1">
           <a href="/" className="flex items-center space-x-2">
@@ -58,7 +58,7 @@ export const Navbar = () => {
             <a
               key={item.name}
               href={item.href}
-              className="text-sm text-google-gray hover:text-google-blue dark:text-gray-400 dark:hover:text-white"
+              className="text-sm text-google-gray hover:text-fundezy-red dark:text-gray-400 dark:hover:text-white"
             >
               {item.name}
             </a>

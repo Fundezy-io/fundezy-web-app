@@ -2,11 +2,18 @@ export const Footer = () => {
   return (
     <footer className="bg-white border-t border-gray-200 dark:bg-gray-950 dark:border-gray-800">
       <div className="mx-auto max-w-7xl overflow-hidden px-6 py-8">
-        <nav className="flex flex-wrap justify-center space-x-6" aria-label="Footer">
+        {/* <nav className="flex flex-wrap justify-center space-x-6" aria-label="Footer">
           <a href="/about" className="text-sm text-gray-600 hover:text-fundezy-red dark:text-gray-400 dark:hover:text-fundezy-red">About</a>
-          {/* <a href="/investor-relations" className="text-sm text-gray-400 hover:text-fundezy-red">Investor Relations</a> */}
           <a href="/how-it-works" className="text-sm text-gray-600 hover:text-fundezy-red dark:text-gray-400 dark:hover:text-fundezy-red">How It Works</a>
           <a href="/pricing" className="text-sm text-gray-600 hover:text-fundezy-red dark:text-gray-400 dark:hover:text-fundezy-red">Pricing</a>
+        </nav> */}
+        
+        <nav className="mt-4 flex flex-wrap justify-center space-x-6" aria-label="Legal">
+          <a href="/tnc" className="text-sm text-gray-600 hover:text-fundezy-red dark:text-gray-400 dark:hover:text-fundezy-red">Challenge Terms and Conditions</a>
+          <a href="/use_of_website" className="text-sm text-gray-600 hover:text-fundezy-red dark:text-gray-400 dark:hover:text-fundezy-red">Conditions for Use of Website</a>
+          <a href="/disclaimers_and_legal" className="text-sm text-gray-600 hover:text-fundezy-red dark:text-gray-400 dark:hover:text-fundezy-red">Disclaimers and Legal Information</a>
+          <a href="/pps" className="text-sm text-gray-600 hover:text-fundezy-red dark:text-gray-400 dark:hover:text-fundezy-red">Privacy Policy Statement</a>
+          <a href="/pics" className="text-sm text-gray-600 hover:text-fundezy-red dark:text-gray-400 dark:hover:text-fundezy-red">Personal Information Collection Statement (PICS)</a>
         </nav>
         <div className="mt-8 flex justify-center space-x-6">
           <a href="https://t.me/+UNeJtf7TC_VjZjJl]" target="_blank" className="text-gray-600 hover:text-fundezy-red dark:text-gray-400 dark:hover:text-fundezy-red">
@@ -23,13 +30,6 @@ export const Footer = () => {
             </svg>
           </a>
         </div>
-        <nav className="mt-4 flex flex-wrap justify-center space-x-6" aria-label="Legal">
-          <a href="/tnc" className="text-sm text-gray-600 hover:text-fundezy-red dark:text-gray-400 dark:hover:text-fundezy-red">Challenge Terms and Conditions</a>
-          <a href="/use_of_website" className="text-sm text-gray-600 hover:text-fundezy-red dark:text-gray-400 dark:hover:text-fundezy-red">Conditions for Use of Website</a>
-          <a href="/disclaimers_and_legal" className="text-sm text-gray-600 hover:text-fundezy-red dark:text-gray-400 dark:hover:text-fundezy-red">Disclaimers and Legal Information</a>
-          <a href="/pps" className="text-sm text-gray-600 hover:text-fundezy-red dark:text-gray-400 dark:hover:text-fundezy-red">Privacy Policy Statement</a>
-          <a href="/pics" className="text-sm text-gray-600 hover:text-fundezy-red dark:text-gray-400 dark:hover:text-fundezy-red">Personal Information Collection Statement (PICS)</a>
-        </nav>
         <p className="mt-8 text-center text-sm text-gray-600 dark:text-gray-400">
           © 2025 Slashiee Pty Ltd Trading As Fundezy All rights reserved.
         </p>

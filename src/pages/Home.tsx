@@ -2,6 +2,7 @@ import { useAnalytics } from '../hooks/useAnalytics';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { getChallenges } from '../services/matchTraderService';
+import { PricingSection } from '../components/PricingSection';
 import { 
   ShieldCheckIcon,
   CurrencyDollarIcon,
@@ -396,87 +397,13 @@ const TradingBenefitsSection = () => (
 );
 
 // Pricing Section Component
-const PricingSection = ({ tiers }: { tiers: any[] }) => (
-  <section className="py-24 bg-white dark:bg-gray-900">
-    <div className="mx-auto max-w-7xl px-6 lg:px-8">
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="mx-auto max-w-2xl text-center"
-      >
-        <h2 className="text-3xl font-bold tracking-tight text-google-gray dark:text-white sm:text-4xl">
-          Choose Your Challenge
-        </h2>
-        <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">
-          Select the funding level that matches your trading goals
-        </p>
-      </motion.div>
-      
-      <motion.div 
-        className="mx-auto mt-16 grid max-w-7xl grid-cols-1 items-center gap-y-6 sm:mt-16 sm:gap-y-0 lg:max-w-none lg:grid-cols-4 lg:gap-x-8"
-        initial="initial"
-        whileInView="animate"
-        viewport={{ once: true }}
-        variants={staggerContainer}
-      >
-        {tiers.map((plan, index) => (
-          <motion.div
-            key={plan.name}
-            variants={fadeInUp}
-            className={`relative rounded-3xl p-8 shadow-2xl ring-1 ${
-              plan.featured 
-                ? 'bg-fundezy-red text-white ring-fundezy-red scale-105 lg:scale-110' 
-                : 'bg-white dark:bg-gray-800 text-google-gray dark:text-white ring-gray-200 dark:ring-gray-700'
-            } ${index === 1 ? 'lg:z-10' : ''}`}
-          >
-            {plan.featured && (
-              <p className="absolute -top-5 left-0 right-0 mx-auto w-32 rounded-full bg-gradient-to-r from-red-500 to-red-600 px-3 py-2 text-sm font-medium text-white text-center">
-                Most Popular
-              </p>
-            )}
-            <div className="text-center">
-              <h3 className={`text-lg font-semibold leading-8 ${plan.featured ? 'text-white' : 'text-google-gray dark:text-white'}`}>
-                {plan.name}
-              </h3>
-              <p className={`mt-4 text-sm leading-6 ${plan.featured ? 'text-red-100' : 'text-gray-600 dark:text-gray-400'}`}>
-                {plan.description}
-              </p>
-              <p className={`mt-6 flex items-baseline justify-center gap-x-2`}>
-                <span className={`text-4xl font-bold tracking-tight ${plan.featured ? 'text-white' : 'text-google-gray dark:text-white'}`}>
-                  ${plan.priceMonthly}
-                </span>
-              </p>
-              <p className={`mt-2 text-lg font-semibold ${plan.featured ? 'text-red-100' : 'text-gray-600 dark:text-gray-400'}`}>
-                per challenge
-              </p>
-            </div>
-            <ul className={`mt-8 space-y-3 text-sm leading-6 ${plan.featured ? 'text-red-100' : 'text-gray-600 dark:text-gray-300'}`}>
-              {plan.features.map((feature: string) => (
-                <li key={feature} className="flex gap-x-3">
-                  <CheckCircleIcon className={`h-6 w-5 flex-none ${plan.featured ? 'text-white' : 'text-fundezy-red'}`} />
-                  {feature}
-                </li>
-              ))}
-            </ul>
-            <motion.a
-              href="/pricing"
-              className={`mt-8 block w-full rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 transition-all duration-300 ${
-                plan.featured
-                  ? 'bg-white text-fundezy-red hover:bg-gray-100 focus-visible:outline-white'
-                  : 'bg-fundezy-red text-white shadow-sm hover:bg-red-600 focus-visible:outline-fundezy-red'
-              }`}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Get Started
-            </motion.a>
-          </motion.div>
-        ))}
-      </motion.div>
-    </div>
-  </section>
+const PricingSectionComponent = ({ tiers }: { tiers: any[] }) => (
+  <PricingSection 
+    tiers={tiers}
+    title="Choose Your Challenge"
+    description="Select the funding level that matches your trading goals"
+    showPopularBadge={true}
+  />
 );
 
 // Platform Features Section Component
@@ -596,7 +523,7 @@ export const Home = () => {
       <StatsSection />
       <FeaturesSection />
       <TradingBenefitsSection />
-      <PricingSection tiers={tiers} />
+      <PricingSectionComponent tiers={tiers} />
       <PlatformFeaturesSection />
       <CTASection />
     </div>
