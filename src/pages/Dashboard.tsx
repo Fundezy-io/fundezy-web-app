@@ -662,6 +662,10 @@ export const Dashboard = () => {
       <UniversityDomainPopup
         isOpen={showUniversityPopup}
         onClose={() => setShowUniversityPopup(false)}
+        onRegister={() => {
+          setShowUniversityPopup(false);
+          navigate('/signin?mode=signup');
+        }}
       />
     </div>
   );

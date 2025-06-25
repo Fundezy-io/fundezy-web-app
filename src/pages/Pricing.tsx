@@ -234,7 +234,11 @@ export default function Pricing() {
       />
       <UniversityDomainPopup 
         isOpen={showUniversityPopup} 
-        onClose={() => setShowUniversityPopup(false)} 
+        onClose={() => setShowUniversityPopup(false)}    
+        onRegister={() => {
+          setShowUniversityPopup(false);
+          navigate('/signin?mode=signup');
+        }}
       />
     </div>
   );
