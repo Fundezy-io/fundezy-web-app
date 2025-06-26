@@ -316,8 +316,8 @@ export default function SignIn() {
                 readOnly={(isSignUp && signUpStage === 'password') || (!isSignUp && signInStage === 'password')}
               />
             </div>
-            {(signInStage === 'password') && (
-              <div className="relative">
+            {signUpStage === 'password' && (
+              <div>
                 <label htmlFor="password" className="sr-only">
                   Password
                 </label>
@@ -327,7 +327,7 @@ export default function SignIn() {
                   type={showPassword ? "text" : "password"}
                   autoComplete="current-password"
                   required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-b-md focus:outline-none focus:ring-fundezy-red focus:border-fundezy-red focus:z-10 sm:text-sm bg-white dark:bg-gray-700"
+                  className="appearance-none relative block w-full px-3 py-2 mt-6 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-fundezy-red focus:border-fundezy-red focus:z-10 sm:text-sm bg-white dark:bg-gray-700"
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -364,7 +364,7 @@ export default function SignIn() {
             </div>
           )}
 
-          {isSignUp && signUpStage === 'password' && (
+          {/* {isSignUp && signUpStage === 'password' && (
             <div className="flex items-center justify-between">
               <button
                 type="button"
@@ -374,7 +374,7 @@ export default function SignIn() {
                 Back
               </button>
             </div>
-          )}
+          )} */}
 
           {!isSignUp && signInStage === 'email' && (
             <div className="flex items-center justify-between">
