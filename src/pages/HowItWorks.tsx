@@ -13,7 +13,7 @@ export const HowItWorks = () => {
   const steps = [
     {
       name: 'Step 1: Fundezy Challenge',
-      description: 'Complete our evaluation process by reaching a 10% profit target while adhering to our risk management rules.',
+      description: 'Reach a 10% profit target while following our risk rules.',
       details: [
         'Trade for 30 days',
         'Reach 10% profit target',
