@@ -110,7 +110,7 @@ const features = [
   {
     icon: ArrowTrendingUpIcon,
     title: 'Scale Your Success',
-    description: 'Scale your account up to $400,000 as you prove your trading consistency.',
+    description: 'Scale your account up to $200,000 as you prove your trading consistency.',
     color: 'text-green-500'
   },
   {
@@ -128,7 +128,7 @@ const features = [
 ];
 
 const tradingBenefits = [
-  'Trade with up to $400,000 funded account',
+  'Trade with up to $200,000 funded account',
   'Keep up to 80% of your profits',
   'Advanced trading platform access',
   'Real-time performance tracking',
@@ -226,7 +226,7 @@ const HeroSection = () => (
           variants={fadeInUp}
           className="mt-6 text-lg leading-8 text-gray-300 max-w-2xl mx-auto"
         >
-          Join the elite community of funded traders. Prove your skills, get funded up to $400,000, 
+          Join the elite community of funded traders. Prove your skills, get funded up to $200,000, 
           and keep up to 80% of your profits. Start your journey to financial freedom today.
         </motion.p>
 

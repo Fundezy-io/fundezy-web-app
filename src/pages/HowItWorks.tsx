@@ -45,7 +45,7 @@ export const HowItWorks = () => {
       details: [
         'Receive funded account',
         'Up to 80% profit split',
-        'Scale up to $400,000',
+        'Scale up to $200,000',
         'Regular payouts',
       ],
       icon: CurrencyDollarIcon,

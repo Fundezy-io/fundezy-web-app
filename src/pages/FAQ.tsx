@@ -62,7 +62,7 @@ const faqData: FAQItem[] = [
         <ol className="list-decimal ml-6 mt-2">
           <li>Evaluation – Trade for 30 days, reach a 10% profit target, and follow risk management rules (maximum 5% daily loss and 10% total loss).</li>
           <li>Verification – Trade for 60 days, reach a 5% profit target, and demonstrate consistent trading while following the same risk management rules.</li>
-          <li>Funded Account – Start trading with Fundezy's capital, keep up to 80% of profits, and scale up to $400,000.</li>
+          <li>Funded Account – Start trading with Fundezy's capital, keep up to 80% of profits, and scale up to $200,000.</li>
         </ol>
       </>
     )
@@ -104,8 +104,8 @@ const faqData: FAQItem[] = [
   {
     id: 17,
     category: 'Trading and Profit Details',
-    question: 'Can I scale up to $400,000 immediately after Step 3?',
-    answer: 'Scaling up to $400,000 is a gradual process based on your performance and consistency. You will need to meet specific milestones to increase your account size.'
+    question: 'Can I scale up to $200,000 immediately after Step 3?',
+    answer: 'Scaling up to $200,000 is a gradual process based on your performance and consistency. You will need to meet specific milestones to increase your account size.'
   },
 
   // Support and Assistance
