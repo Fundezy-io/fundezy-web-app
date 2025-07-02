@@ -145,7 +145,14 @@ export default function SignIn() {
     setSignInStage('email');
   };
 
+
+  const handleRegisterWithNewEmail = () => {
+    setShowUniversityEmailWarning(false);
+    navigate('/signin?mode=signup', { replace: true });
+  }
+
   if (showUniversityEmailWarning) {
+
     return (
       <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
@@ -160,7 +167,7 @@ export default function SignIn() {
 
           <div className="mt-8 space-y-4">
             <button
-              onClick={() => setShowUniversityEmailWarning(false)}
+              onClick={handleRegisterWithNewEmail}
               className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-fundezy-red hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-fundezy-red"
             >
               Register with New Email

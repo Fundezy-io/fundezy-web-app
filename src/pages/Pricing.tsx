@@ -237,6 +237,7 @@ export default function Pricing() {
         onClose={() => setShowUniversityPopup(false)}    
         onRegister={() => {
           setShowUniversityPopup(false);
+          console.log('Navigating to signin with mode=signup');
           navigate('/signin?mode=signup');
         }}
       />

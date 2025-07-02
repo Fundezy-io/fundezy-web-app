@@ -664,7 +664,7 @@ export const Dashboard = () => {
         onClose={() => setShowUniversityPopup(false)}
         onRegister={() => {
           setShowUniversityPopup(false);
-          navigate('/signin?mode=signup');
+          navigate('/signin?mode=signup', { });
         }}
       />
     </div>
