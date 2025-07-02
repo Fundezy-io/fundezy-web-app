@@ -316,7 +316,7 @@ export default function SignIn() {
                 readOnly={(isSignUp && signUpStage === 'password') || (!isSignUp && signInStage === 'password')}
               />
             </div>
-            {signUpStage === 'password' && (
+            {signUpStage === 'password' || signInStage === 'password' && (
               <div>
                 <label htmlFor="password" className="sr-only">
                   Password
