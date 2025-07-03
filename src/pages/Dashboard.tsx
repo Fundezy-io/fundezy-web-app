@@ -95,6 +95,7 @@ export const Dashboard = () => {
       var statusMap: { [key: string]: string } = {};
       Promise.all(matchTraderAccount).then((accounts) => {
       accounts.forEach((account) => {
+        console.log('account', JSON.stringify(account));
         statusMap[account.accountId] = account.status;
       });
       setTradingAcctStatusMap(statusMap);

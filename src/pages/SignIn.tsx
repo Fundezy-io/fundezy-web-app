@@ -117,18 +117,23 @@ export default function SignIn() {
 
   const handleProceedWithUniversityEmail = async () => {
     setShowUniversityEmailWarning(false);
-    setIsLoading(true);
-    try {
-      const userCredential = await signUpWithEmail(email, password, firstName, lastName);
-      if (userCredential.user) {
-        await sendEmailVerification(userCredential.user);
-        navigate('/verify-email');
-      }
-    } catch (error: any) {
-      setError(error.message || 'Invalid email or password');
-    } finally {
-      setIsLoading(false);
+    if (isSignUp) {
+      setSignUpStage('password');
+    } else {
+      setSignInStage('password');
     }
+    // setIsLoading(true);
+    // try {
+    //   const userCredential = await signUpWithEmail(email, password, firstName, lastName);
+    //   if (userCredential.user) {
+    //     await sendEmailVerification(userCredential.user);
+    //     navigate('/verify-email');
+    //   }
+    // } catch (error: any) {
+    //   setError(error.message || 'Invalid email or password');
+    // } finally {
+    //   setIsLoading(false);
+    // }
   };
 
   const handleBackToNameEmail = () => {
@@ -316,14 +321,14 @@ export default function SignIn() {
                 type="email"
                 autoComplete="email"
                 required
-                className={`appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white ${(signInStage === 'password') ? 'bg-gray-100 dark:bg-gray-800 cursor-not-allowed' : 'bg-white dark:bg-gray-700'} ${(!isSignUp && signInStage === 'email') || (isSignUp && signUpStage === 'name-email') ? 'rounded-t-md' : 'rounded-md'} focus:outline-none focus:ring-fundezy-red focus:border-fundezy-red focus:z-10 sm:text-sm`}
+                className={`appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white ${(signInStage === 'password') ? 'bg-gray-100 dark:bg-gray-800 cursor-not-allowed' : 'bg-white dark:bg-gray-700'} ${(!isSignUp && signInStage === 'email') || (isSignUp && signUpStage === 'name-email') ? 'rounded-md' : 'rounded-md'} focus:outline-none focus:ring-fundezy-red focus:border-fundezy-red focus:z-10 sm:text-sm`}
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 readOnly={(isSignUp && signUpStage === 'password') || (!isSignUp && signInStage === 'password')}
               />
             </div>
-            {signUpStage === 'password' || signInStage === 'password' && (
+            {(signUpStage === 'password' || signInStage === 'password') && (
               <div>
                 <label htmlFor="password" className="sr-only">
                   Password
@@ -359,7 +364,7 @@ export default function SignIn() {
             )}
           </div>
 
-          {(!isSignUp && signInStage === 'password') && (
+          {/* {(!isSignUp && signInStage === 'password') && (
             <div className="flex items-center justify-between">
               <button
                 type="button"
@@ -369,7 +374,7 @@ export default function SignIn() {
                 Back
               </button>
             </div>
-          )}
+          )} */}
 
           {/* {isSignUp && signUpStage === 'password' && (
             <div className="flex items-center justify-between">
