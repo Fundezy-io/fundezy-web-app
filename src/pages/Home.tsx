@@ -11,7 +11,8 @@ import {
   ArrowTrendingUpIcon,
   CheckCircleIcon,
   PlayIcon,
-  BanknotesIcon
+  BanknotesIcon,
+  ArrowRightIcon
 } from '@heroicons/react/24/outline';
 
 const tiersMap = {
@@ -236,20 +237,22 @@ const HeroSection = () => (
           className="mt-10 flex items-center justify-center gap-x-6 flex-wrap"
         >
           <motion.a 
-            href="/pricing" 
-            className="bg-fundezy-red px-8 py-4 text-lg font-semibold text-white shadow-sm hover:bg-red-600 rounded-lg transition-all duration-300"
-            whileHover={{ scale: 1.05 }}
+            href="/get_started" 
+            className="bg-fundezy-red px-10 py-5 text-xl font-bold text-white shadow-lg hover:bg-red-600 rounded-lg transition-all duration-300 flex items-center gap-3"
+            whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(255, 68, 68, 0.3)" }}
             whileTap={{ scale: 0.95 }}
           >
-            Start Your Challenge
+            <PlayIcon className="w-6 h-6" />
+            Start Free Demo
+            <ArrowRightIcon className="w-5 h-5" />
           </motion.a>
           <motion.a 
             href="/how-it-works"
             className="text-lg font-semibold leading-6 text-white hover:text-gray-300 transition-colors duration-300 flex items-center gap-2"
             whileHover={{ x: 5 }}
           >
-            <PlayIcon className="w-5 h-5" />
-            Watch Demo
+            Learn How It Works
+            <ArrowRightIcon className="w-5 h-5" />
           </motion.a>
         </motion.div>
       </motion.div>
@@ -478,19 +481,21 @@ const CTASection = () => (
         </p>
         <div className="mt-10 flex items-center justify-center gap-x-6">
           <motion.a
-            href="/pricing"
-            className="bg-white px-8 py-4 text-lg font-semibold text-fundezy-red shadow-sm hover:bg-gray-100 rounded-lg transition-all duration-300"
+            href="/get_started"
+            className="bg-white px-10 py-5 text-xl font-bold text-fundezy-red shadow-lg hover:bg-gray-100 rounded-lg transition-all duration-300 flex items-center gap-3"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            Start Your Challenge Now
+            <PlayIcon className="w-6 h-6" />
+            Start Free Demo
+            <ArrowRightIcon className="w-5 h-5" />
           </motion.a>
           <motion.a
-            href="/how-it-works"
-            className="text-lg font-semibold leading-6 text-white hover:text-red-100 transition-colors duration-300"
+            href="/pricing"
+            className="text-lg font-semibold leading-6 text-white hover:text-red-100 transition-colors duration-300 flex items-center gap-2"
             whileHover={{ x: 5 }}
           >
-            Learn more <span aria-hidden="true">→</span>
+            View Challenges <ArrowRightIcon className="w-5 h-5" />
           </motion.a>
         </div>
       </motion.div>

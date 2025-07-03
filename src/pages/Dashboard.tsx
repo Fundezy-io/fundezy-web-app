@@ -299,7 +299,7 @@ export const Dashboard = () => {
         {/* Get Demo Account Section - Only show if less than 3 active accounts */}
         {showDemoAccountSection && (
           <div className="">
-            <div className="grid grid-cols-1 md:grid-cols-1 gap-8 ">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 ">
               {/* Demo Account Button */}
               <div className="text-center dark:bg-gray-800 mb-8 bg-gray-50 rounded-lg p-12">
                 <button
@@ -314,6 +314,27 @@ export const Dashboard = () => {
                 <p className="mt-2 text-gray-600 dark:text-gray-300">
                   Start trading with virtual funds and prove your skills
                 </p>
+              </div>
+
+              {/* Getting Started Guide */}
+              <div className="text-center dark:bg-gray-800 mb-8 bg-blue-50 rounded-lg p-12">
+                <div className="inline-flex items-center justify-center p-4 rounded-full bg-blue-500 text-white mb-4">
+                  <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                </div>
+                <h2 className="mt-4 text-xl font-semibold text-gray-900 dark:text-white">
+                  New to Trading?
+                </h2>
+                <p className="mt-2 text-gray-600 dark:text-gray-300 mb-4">
+                  Follow our step-by-step guide to get started
+                </p>
+                <a
+                                        href="/get_started"
+                  className="inline-flex items-center px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-md hover:bg-blue-600 transition-colors"
+                >
+                  View Getting Started Guide
+                </a>
               </div>
             </div>
           </div>

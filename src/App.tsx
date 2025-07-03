@@ -6,6 +6,7 @@ import { Dashboard } from './pages/Dashboard';
 import Challenge from './pages/Challenge';
 import About from './pages/About';
 import { HowItWorks } from './pages/HowItWorks';
+import { Onboarding } from './pages/Onboarding';
 import SignIn from './pages/SignIn';
 import VerifyEmail from './pages/VerifyEmail';
 import InvestorRelations from './pages/InvestorRelations';
@@ -115,6 +116,7 @@ export default function App() {
                 }
               />
               <Route path="/how-it-works" element={<HowItWorks />} />
+              <Route path="/get_started" element={<Onboarding />} />
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/admin" element={<Admin />} />
             </Routes>
