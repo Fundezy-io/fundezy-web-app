@@ -8,6 +8,8 @@ import { isUniversityEmail } from '../utils/domainCheck';
 import { UniversityDomainPopup } from '../components/UniversityDomainPopup';
 import { PricingSection } from '../components/PricingSection';
 import { motion } from 'framer-motion';
+import { signOut } from 'firebase/auth';
+import { auth } from '../config/firebase';
 
 const tiersMap = {
   "26135048-f2ce-48ad-a633-df3646eb48ad": (initialBalance: number, fee: number) => ({
@@ -236,8 +238,8 @@ export default function Pricing() {
         isOpen={showUniversityPopup} 
         onClose={() => setShowUniversityPopup(false)}    
         onRegister={() => {
+          signOut(auth);
           setShowUniversityPopup(false);
-          console.log('Navigating to signin with mode=signup');
           navigate('/signin?mode=signup');
         }}
       />
