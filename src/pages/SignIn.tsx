@@ -140,9 +140,6 @@ export default function SignIn() {
     setSignUpStage('name-email');
   };
 
-  const handleBackToEmail = () => {
-    setSignInStage('email');
-  };
 
   const handleToggleSignUp = () => {
     setIsSignUp(!isSignUp);
