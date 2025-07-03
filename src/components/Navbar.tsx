@@ -17,9 +17,9 @@ export const Navbar = () => {
 
   const navigation = [
     { name: 'Home', href: '/' },
+    { name: 'Get Started', href: '/get_started', featured: true },
     { name: 'How It Works', href: '/how-it-works' },
     { name: 'Pricing', href: '/pricing' },
-    { name: 'About', href: '/about' },
     { name: 'FAQ', href: '/faq' },
   ];
 
@@ -58,7 +58,11 @@ export const Navbar = () => {
             <a
               key={item.name}
               href={item.href}
-              className="text-sm text-google-gray hover:text-fundezy-red dark:text-gray-400 dark:hover:text-white"
+              className={`text-sm transition-colors duration-200 ${
+                item.featured 
+                  ? 'text-fundezy-red font-semibold border-b-2 border-fundezy-red hover:text-red-600' 
+                  : 'text-google-gray hover:text-fundezy-red dark:text-gray-400 dark:hover:text-white'
+              }`}
             >
               {item.name}
             </a>
@@ -114,7 +118,11 @@ export const Navbar = () => {
                   <a
                     key={item.name}
                     href={item.href}
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base text-google-gray hover:bg-google-hover dark:text-gray-400 dark:hover:bg-gray-800"
+                    className={`-mx-3 block rounded-lg px-3 py-2 text-base transition-colors duration-200 ${
+                      item.featured 
+                        ? 'text-fundezy-red font-semibold bg-fundezy-red/10 hover:bg-fundezy-red/20' 
+                        : 'text-google-gray hover:bg-google-hover dark:text-gray-400 dark:hover:bg-gray-800'
+                    }`}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.name}
