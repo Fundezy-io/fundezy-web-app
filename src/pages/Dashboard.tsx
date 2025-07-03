@@ -27,6 +27,8 @@ import { mttTradingAccountService } from '../services/mttTradingAccountService';
 import { isUniversityEmail } from '../utils/domainCheck';
 import { UniversityDomainPopup } from '../components/UniversityDomainPopup';
 import { getTradingAccountById } from '../services/matchTraderService';
+import { signOut } from 'firebase/auth';
+import { auth } from '../config/firebase';
 
 export const Dashboard = () => {
   const { user } = useAuth();
@@ -96,7 +98,7 @@ export const Dashboard = () => {
       Promise.all(matchTraderAccount).then((accounts) => {
       accounts.forEach((account) => {
         console.log('account', JSON.stringify(account));
-        statusMap[account.accountId] = account.status;
+        statusMap[account.accountId] = account?.status || 'INACTIVE';
       });
       setTradingAcctStatusMap(statusMap);
      });
@@ -356,7 +358,7 @@ export const Dashboard = () => {
             Your Trading Accounts
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {...mt5Accounts.map((account) => (
+            {...mt5Accounts.filter(account => tradingAcctStatusMap[account.id] === 'ACTIVE' || tradingAcctStatusMap[account.id] === 'ACTIVE_PARTICIPATING_IN_CHALLENGE').map((account) => (
               <button
                 key={account.id}
                 onClick={(account.server !== 'MTT' || (account.server === 'MTT' && (tradingAcctStatusMap[account.id] === 'ACTIVE' || tradingAcctStatusMap[account.id] === 'ACTIVE_PARTICIPATING_IN_CHALLENGE'))) ?  () => {
@@ -664,8 +666,9 @@ export const Dashboard = () => {
         isOpen={showUniversityPopup}
         onClose={() => setShowUniversityPopup(false)}
         onRegister={() => {
+          signOut(auth);
           setShowUniversityPopup(false);
-          navigate('/signin?mode=signup', { });
+          navigate('/signin?mode=signup');
         }}
       />
     </div>
