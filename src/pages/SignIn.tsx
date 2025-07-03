@@ -136,6 +136,11 @@ export default function SignIn() {
     // }
   };
 
+
+  const handleBackToEmail = () => {
+    setSignInStage('email');
+  };
+
   const handleBackToNameEmail = () => {
     setSignUpStage('name-email');
   };
@@ -365,7 +370,7 @@ export default function SignIn() {
             )}
           </div>
 
-          {/* {(!isSignUp && signInStage === 'password') && (
+          {(!isSignUp && signInStage === 'password') && (
             <div className="flex items-center justify-between">
               <button
                 type="button"
@@ -375,9 +380,9 @@ export default function SignIn() {
                 Back
               </button>
             </div>
-          )} */}
+          )}
 
-          {/* {isSignUp && signUpStage === 'password' && (
+          {isSignUp && signUpStage === 'password' && (
             <div className="flex items-center justify-between">
               <button
                 type="button"
@@ -387,7 +392,7 @@ export default function SignIn() {
                 Back
               </button>
             </div>
-          )} */}
+          )}
 
           {!isSignUp && signInStage === 'email' && (
             <div className="flex items-center justify-between">
