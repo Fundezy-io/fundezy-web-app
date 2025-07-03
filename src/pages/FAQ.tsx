@@ -101,12 +101,6 @@ const faqData: FAQItem[] = [
     question: 'How is the profit split calculated in the funded account phase?',
     answer: 'In the funded account phase, you will keep up to 80% of the profits you generate. The exact percentage will depend on the agreement with Fundezy.'
   },
-  {
-    id: 17,
-    category: 'Trading and Profit Details',
-    question: 'Can I scale up to $200,000 immediately after Step 3?',
-    answer: 'Scaling up to $200,000 is a gradual process based on your performance and consistency. You will need to meet specific milestones to increase your account size.'
-  },
 
   // Support and Assistance
   {
