@@ -149,6 +149,10 @@ export default function SignIn() {
 
 
   const handleRegisterWithNewEmail = () => {
+    setEmail('');
+    setPassword('');
+    setFirstName('');
+    setLastName('');
     setShowUniversityEmailWarning(false);
     navigate('/signin?mode=signup', { replace: true });
   }
