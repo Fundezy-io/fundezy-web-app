@@ -55,7 +55,7 @@ export default function SignIn() {
     setIsLoading(true);
     
     try {
-      if (isUniversityEmail(email)) {
+      if (isUniversityEmail(email) && signInStage !== 'password' && signUpStage !== 'password') {
         setShowUniversityEmailWarning(true);
         setIsLoading(false);
         return;
