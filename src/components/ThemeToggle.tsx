@@ -3,12 +3,12 @@ import { SunIcon, MoonIcon } from '@heroicons/react/24/outline';
 
 export const ThemeToggle = () => {
   const [darkMode, setDarkMode] = useState(() => {
-    // Check localStorage and system preference on initial load
+    // Check localStorage first, then default to dark mode
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
       return savedTheme === 'dark';
     }
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return true; // Default to dark mode
   });
 
   useEffect(() => {
