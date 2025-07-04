@@ -153,7 +153,7 @@ export const Dashboard = () => {
 
         // Transform MTT accounts into MT5Account format
         const transformedMTTAccounts: TradingAccount[] = mttTradingAccounts.map(mttTradingAccount => ({
-          id: mttTradingAccount.id,
+          id: mttTradingAccount.login || '',
           server: 'MTT', // Default server for MTT accounts
           login: mttAccount.email || '', // Use login if available, otherwise empty string
           password: mttAccount.password || '', // MTT accounts don't have password
@@ -358,7 +358,7 @@ export const Dashboard = () => {
             Your Trading Accounts
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {...mt5Accounts.filter(account => tradingAcctStatusMap[account.id] === 'ACTIVE' || tradingAcctStatusMap[account.id] === 'ACTIVE_PARTICIPATING_IN_CHALLENGE').map((account) => (
+            {...mt5Accounts.filter(account => account.server !== 'MTT' || (account.server === 'MTT' && (tradingAcctStatusMap[account.id] === 'ACTIVE' || tradingAcctStatusMap[account.id] === 'ACTIVE_PARTICIPATING_IN_CHALLENGE'))).map((account) => (
               <button
                 key={account.id}
                 onClick={(account.server !== 'MTT' || (account.server === 'MTT' && (tradingAcctStatusMap[account.id] === 'ACTIVE' || tradingAcctStatusMap[account.id] === 'ACTIVE_PARTICIPATING_IN_CHALLENGE'))) ?  () => {
@@ -421,6 +421,7 @@ export const Dashboard = () => {
             server=""
             login=""
             password=""
+            accountId=''
             firstName={user?.displayName?.split(' ')[0] ?? ''}
             lastName={user?.displayName?.split(' ').slice(1).join(' ') ?? ''}
             loading={false}
@@ -466,6 +467,7 @@ export const Dashboard = () => {
 
             {/* MT5 Credentials */}
             <Credentials
+              accountId={selectedAccount.id ?? ''}
               firstName={user?.displayName?.split(' ')[0] ?? ''}
               lastName={user?.displayName?.split(' ').slice(1).join(' ') ?? ''}
               server={selectedAccount.server}

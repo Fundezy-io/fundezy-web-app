@@ -8,6 +8,7 @@ interface MT5CredentialsProps {
   server: string;
   login: string;
   password: string;
+  accountId: string;
   loading: boolean;
   error: string | null;
   email: string;
@@ -17,7 +18,7 @@ interface MT5CredentialsProps {
   onRefresh: () => void;
 }
 
-export const Credentials = ({ server, login, password, loading, error, email, status = 'active', firstName, lastName, onRefresh }: MT5CredentialsProps) => {
+export const Credentials = ({ server, login, password, accountId, loading, error, email, status = 'active', firstName, lastName, onRefresh }: MT5CredentialsProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const [creatingAccount, setCreatingAccount] = useState(false);
   const [createAccountError, setCreateAccountError] = useState<string | null>(null);
@@ -25,6 +26,7 @@ export const Credentials = ({ server, login, password, loading, error, email, st
   const [showFeedbackForm, setShowFeedbackForm] = useState(false);
   const [copiedLogin, setCopiedLogin] = useState(false);
   const [copiedPassword, setCopiedPassword] = useState(false);
+  const [copiedAccountId, setCopiedAccountId] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [showFullscreenIframe, setShowFullscreenIframe] = useState(false);
   const [formData, setFormData] = useState({
@@ -83,15 +85,18 @@ export const Credentials = ({ server, login, password, loading, error, email, st
     }
   };
 
-  const copyToClipboard = async (text: string, type: 'login' | 'password') => {
+  const copyToClipboard = async (text: string, type: 'login' | 'password' | 'accountId') => {
     try {
       await navigator.clipboard.writeText(text);
       if (type === 'login') {
         setCopiedLogin(true);
         setTimeout(() => setCopiedLogin(false), 2000);
-      } else {
+      } else if (type === 'password') {
         setCopiedPassword(true);
         setTimeout(() => setCopiedPassword(false), 2000);
+      } else if (type === 'accountId') {
+        setCopiedAccountId(true);
+        setTimeout(() => setCopiedAccountId(false), 2000);
       }
     } catch (err) {
       console.error('Failed to copy text: ', err);
@@ -170,7 +175,7 @@ export const Credentials = ({ server, login, password, loading, error, email, st
         )}
         
         {/* Credentials Grid */}
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-4 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Server</label>
             <div className="relative mt-1">
@@ -200,6 +205,31 @@ export const Credentials = ({ server, login, password, loading, error, email, st
                   className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-500"
                 >
                   {copiedLogin ? (
+                    <ClipboardDocumentCheckIcon className="h-5 w-5 text-green-500" aria-hidden="true" />
+                  ) : (
+                    <ClipboardIcon className="h-5 w-5" aria-hidden="true" />
+                  )}
+                </button>
+              )}
+            </div>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Account ID</label>
+            <div className="relative mt-1">
+              <input
+                type="text"
+                value={status === 'active' ? accountId : ''}
+                readOnly
+                className="block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 dark:bg-gray-700 dark:text-gray-300 p-2 pr-10"
+                placeholder={status !== 'active' ? 'Account inactive' : ''}
+              />
+              {status === 'active' && (
+                <button
+                  type="button"
+                  onClick={() => copyToClipboard(accountId, 'accountId')}
+                  className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-500"
+                >
+                  {copiedAccountId ? (
                     <ClipboardDocumentCheckIcon className="h-5 w-5 text-green-500" aria-hidden="true" />
                   ) : (
                     <ClipboardIcon className="h-5 w-5" aria-hidden="true" />
